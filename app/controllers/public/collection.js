@@ -4,14 +4,13 @@ exports.controller = function(req, param, res) {
 	if (!param || !param.collection)
 		return res.render("invalid call");
 	
+	var template = this.views.collection;
+	
 	var records = [
 		{_id:1, name:"adrien"},
-		{_id:2, name:"loick"}
+		{_id:2, name:"jie"},
+		{_id:3, name:"loick"}
 	];
-	
-	console.log(this.views);
-	
-	var template = this.views.collection;
 	
 	var html = template(records);
 	

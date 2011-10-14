@@ -5,12 +5,13 @@ function makeHtmlPage(body, params) {
 			'<head>',
 				'<meta charset="utf-8" />',
 		//		'<link href="/favicon.png" rel="icon" type="image/png" />',
-				'<link href="nodeMongoAdmin.css" rel="stylesheet" type="text/css" />',
-		//		'<script src="nodeMongoAdmin.css" type="text/javascript" charset="utf-8"></script>',
+				'<link href="/nodeMongoAdmin.css" rel="stylesheet" type="text/css" />',
 				'<title>nodeMongoAdmin</title>',
 			'</head>',
 			'<body>',
 				body,
+				'<script src="/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>',
+				'<script src="/nodeMongoAdmin.js" type="text/javascript" charset="utf-8"></script>',
 			'</body>',
 		'</html>'
 	];
