@@ -1,35 +1,60 @@
-function makeHtmlPage(body) {
+function makeHtmlPage(body, params) {
 	var html = [
 		'<!DOCTYPE html>',
 		'<html>',
-		'<head>',
-		'<meta charset="utf-8" />',
-//		'<link href="'+render.urlPrefix+'/favicon.png" rel="icon" type="image/png" />'
-	];
-	
-	html.push('<title>nodeMongoAdmin</title>');
-	/*
-	for (var i in params.css)
-		out.push('<link href="'+render.urlPrefix+'/'+params.mobilecss[i]+includeSuffix+'" rel="stylesheet" type="text/css" />');
-	
-	for (var i in params.js)
-		out.push('<script src="'+render.urlPrefix+'/js/'+params.mobilejs[i]+includeSuffix+'" type="text/javascript" charset="utf-8"></script>');
-	*/
-	html.push(
-		'</head>',
-		'<body>',
-		body,
-		'</body>',
+			'<head>',
+				'<meta charset="utf-8" />',
+		//		'<link href="/favicon.png" rel="icon" type="image/png" />',
+				'<link href="nodeMongoAdmin.css" rel="stylesheet" type="text/css" />',
+		//		'<script src="nodeMongoAdmin.css" type="text/javascript" charset="utf-8"></script>',
+				'<title>nodeMongoAdmin</title>',
+			'</head>',
+			'<body>',
+				body,
+			'</body>',
 		'</html>'
-	);
+	];
 	
 	return html.join("\n");
 }
 
+function detectColumns(records) {
+	var colSet = {};
+	for (var i in records)
+		for (var j in records[i])
+			colSet[j] = true;
+	
+	delete colSet["_id"];
+	var columns = [];
+	
+	for (var i in colSet)
+		columns.push(i);
+	
+	columns.sort();
+	columns.unshift("_id");
+	
+	return columns;
+}
 
 exports.view = function(records) {
+	
+	var columns = detectColumns(records);
+	
+	var htmlCols = '<tr><th>' + columns.join('</th><th>') + '</th></tr>';
+	
+	var htmlRecords = [];
+	for (var i in records) {
+		var row = '';
+		for (var j in columns)
+			row += '<td>' + records[i][columns[j]] + '</td>';
+		htmlRecords.push('<tr>' + row + '</tr>');
+	}
+	
 	var html = [
-		'<p>coucou</p>',
+		'<table>',
+			htmlCols,
+			htmlRecords.join("\n"),
+		'</table>',
 	];
 	
 	return makeHtmlPage(html.join("\n"));

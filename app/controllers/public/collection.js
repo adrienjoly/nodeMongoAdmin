@@ -5,8 +5,8 @@ exports.controller = function(req, param, res) {
 		return res.render("invalid call");
 	
 	var records = [
-		{id:1, name:"adrien"},
-		{id:2, name:"loick"}
+		{_id:1, name:"adrien"},
+		{_id:2, name:"loick"}
 	];
 	
 	console.log(this.views);
