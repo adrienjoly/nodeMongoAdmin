@@ -1,12 +1,18 @@
 var http = require('http');
 var fs = require('fs');
 
-for(var i in process.argv)
+var devMode = false;
+
+for(var i in process.argv) {
 	console.log("command line parameter #" + i + " : " + process.argv[i]);
+	if (process.argv[i] == "--dev")
+		devMode = true;
+}
 
 try {
-	console.log("looking for dotcloud env file...");
-	var config = JSON.parse(fs.readFileSync("/home/dotcloud/environment.json"));
+	var dotCloudConfigFile = "/home/dotcloud/environment.json";
+	var config = JSON.parse(fs.readFileSync(dotCloudConfigFile));
+	console.log("Parsing "+dotCloudConfigFile+"...");
 	for (var i in config) {
 		console.log("Setting env " + i + " = " + config[i]);
 		process.env[i] = config[i];
@@ -28,5 +34,5 @@ var dbName = "whyd_freebase";
 require('./app/models/mongodb').init(dbName, function(){
 	console.log("Starting web server...");
 	var Application = require('my/http').Application;
-	new Application(__dirname, false).start();
+	new Application(__dirname, devMode).start();
 });
