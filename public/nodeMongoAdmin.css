@@ -16,3 +16,29 @@ tr:nth-child(odd) {
 td.sel {
 	background: red;
 }
+
+#editor {
+	position:fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 10px;
+	background: gray;
+}
+
+#editor textarea {
+	width: 400px;
+	height: 30px;
+	vertical-align: top;
+}
+
+#msgBox {
+	display:none;
+	position:fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 10px;
+	background: yellow;
+	text-align: center;
+}

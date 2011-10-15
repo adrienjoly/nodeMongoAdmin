@@ -12,7 +12,7 @@ exports.controller = function(req, param, res) {
 		{_id:3, name:"loick"}
 	];
 	
-	var html = template(records);
+	var html = template(param.collection, records);
 	
 	res.render(html, null, {"content-type": "text/html"});
 };

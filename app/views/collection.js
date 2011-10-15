@@ -37,7 +37,7 @@ function detectColumns(records) {
 	return columns;
 }
 
-exports.view = function(records) {
+exports.view = function(collectionName, records) {
 	
 	var columns = detectColumns(records);
 	
@@ -52,10 +52,13 @@ exports.view = function(records) {
 	}
 	
 	var html = [
+		'<p>Collection: ' + collectionName + '</p>',
 		'<table>',
 			htmlCols,
 			htmlRecords.join("\n"),
 		'</table>',
+		'<div id="editor"><textarea name="value"></textarea><button>save</button></div>',
+		'<div id="msgBox"></div>'
 	];
 	
 	return makeHtmlPage(html.join("\n"));
