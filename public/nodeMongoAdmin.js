@@ -116,7 +116,17 @@ $(function() {
 				cursor.selectByElem($cell);
 		});
 		var $del = $('<div class="del">x</div>').click(function() {
-			confirm("delete id=" + cursor.getRowId($row));
+			var id = cursor.getRowId($row);
+			if (confirm("delete id=" + id + ' ?')) {
+				var url = '/delete?collection='+encodeURIComponent(collectionName)+'&orderBy='+encodeURIComponent(orderBy)+'&element='+ encodeURIComponent(id);
+				console.log(url);
+				$.ajax({
+					url: url,
+					success: function (r) {
+						window.location.reload();
+					}
+				});
+			}
 		});
 		$cells.last().append($del);
 	}

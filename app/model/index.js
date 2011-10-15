@@ -15,7 +15,8 @@ exports.model = function($, db, Return) {
           collection: collection, 
           elements: elts, 
           nbPages: Math.ceil(count/limit),
-		  page: page
+		  page: page,
+		  orderBy: $.orderBy || '_id'
         });
       }
     );  
