@@ -1,20 +1,55 @@
+body {
+	background: #ecf9fe;
+	font-family: "Helvetica Neue", Helvetica, Arial, Sans-serif;
+	font-size: 12px;
+	color: #303c45;
+}
+
 table {
 	border-collapse:collapse;
 }
-table,th, td {
+
+
+table tr th {
+	border: 1px solid #87929a;
+	padding: 12px;
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #FFF;
+	box-shadow: inset 0 0 1px rgba(255,255,255,0.62);
+	-webkit-box-shadow: inset 0 0 1px rgba(255,255,255,0.62);
+	-moz-box-shadow: inset 0 0 1px rgba(255,255,255,0.62);
+}
+
+table tr:first-child {
+	background-image: -ms-linear-gradient(top, #ecf9fb 0%, #b5c0c8 100%);
+	background-image: -moz-linear-gradient(top, #ecf9fb 0%, #b5c0c8 100%);
+	background-image: -o-linear-gradient(top, #ecf9fb 0%, #b5c0c8 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ecf9fb), color-stop(1, #b5c0c8));
+	background-image: -webkit-linear-gradient(top, #ecf9fb 0%, #b5c0c8 100%);
+	background-image: linear-gradient(top, #ecf9fb 0%, #b5c0c8 100%);
+}
+
+td {
 	border: 1px solid gray;
+	text-align: center;
+	padding: 10px;
 }
 
 tr:nth-child(even) {
-	background: #CCC
+	background: #FFF;
 }
 
 tr:nth-child(odd) {
-	background: #FFF
+	background: #f7fdfe;
 }
 
+
 td.sel {
-	background: red;
+	background: #FFFFFF;
+	box-shadow: 0 0 3px #00223e;
+	-webkit-box-shadow: 0 0 3px #00223e;
+	-moz-box-shadow: 0 0 3px #00223e;
 }
 
 #editor {
@@ -23,22 +58,68 @@ td.sel {
 	left: 0px;
 	right: 0px;
 	padding: 10px;
-	background: gray;
+	font-size: 14px;
+	border-top: 1px solid #282828;
+	background-image: -ms-linear-gradient(top, #6b7082 0%, #444853 100%);
+	background-image: -moz-linear-gradient(top, #6b7082 0%, #444853 100%);
+	background-image: -o-linear-gradient(top, #6b7082 0%, #444853 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6b7082), color-stop(1, #444853));
+	background-image: -webkit-linear-gradient(top, #6b7082 0%, #444853 100%);
+	background-image: linear-gradient(top, #6b7082 0%, #444853 100%);
 }
 
 #editor textarea {
 	width: 400px;
 	height: 30px;
+	font-size: 12px;
+	padding: 4px;
 	vertical-align: top;
+	border: 1px solid rgba(25,26,27,1);
+	box-shadow: inset 0 2px 3px rgba(0,0,0,0.36);
+	-webkit-box-shadow: inset 0 2px 3px rgba(0,0,0,0.36);
+	-moz-box-shadow: inset 0 2px 3px rgba(0,0,0,0.36);
+	border-radius: 3px;
+	-moz-border-radius: 3;
+	-webkit-border-radius: 3px;
+}
+
+#editor textarea:focus {
+	box-shadow: 0 0 3px rgba(25,26,27,1),inset 0 2px 3px rgba(0,0,0,0.36);
+	-webkit-box-shadow: 0 0 3px rgba(25,26,27,1),inset 0 2px 3px rgba(0,0,0,0.36);
+	-moz-box-shadow: 0 0 3px rgba(25,26,27,1),inset 0 2px 3px rgba(0,0,0,0.36);
+	outline: none;
 }
 
 #msgBox {
+	color: #a2822a;
+	font-weight: bold;
+	font-size: 16px;
 	display:none;
 	position:fixed;
 	top: 0px;
 	left: 0px;
 	right: 0px;
 	padding: 10px;
-	background: yellow;
 	text-align: center;
+	border-bottom: 1px solid #b59a50;
+	text-shadow: 0 1px 0 #FFFFFF;
+	background-image: -ms-linear-gradient(top, #fff0bf 0%, #ffe8a0 100%);
+	background-image: -moz-linear-gradient(top, #fff0bf 0%, #ffe8a0 100%);
+	background-image: -o-linear-gradient(top, #fff0bf 0%, #ffe8a0 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff0bf), color-stop(1, #ffe8a0));
+	background-image: -webkit-linear-gradient(top, #fff0bf 0%, #ffe8a0 100%);
+	background-image: linear-gradient(top, #fff0bf 0%, #ffe8a0 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+}
+
+#editor > button {
+	margin-left: 10px;
+	background: url(../images/btn-submit.png);
+	width: 80px;
+	height: 40px;
+	text-indent: -9999px;
+	border: none;
+	cursor: pointer;
 }
