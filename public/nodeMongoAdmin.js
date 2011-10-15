@@ -43,8 +43,8 @@ $(function() {
 			},
 			selectByElem: function(elem) {
 				var index = $("td").index(elem)
-				this.col = index % nbCols;
-				this.row = 1+ Math.floor(index / nbCols);
+				this.col = index % (nbCols+1);
+				this.row = 1+ Math.floor(index / (nbCols+1));
 				this._updateElem(elem);
 			},
 			val: function (newVal){
@@ -61,7 +61,7 @@ $(function() {
 			reindexTable: function() {
 				$cols = $table.find("th");
 				$rows = $table.find("tr");
-				nbCols = $cols.length -1;
+				nbCols = $cols.length;// -1;
 				nbRows = $rows.length;
 				//console.log("nbCols, nbRows", nbCols, nbRows);
 			}
@@ -138,7 +138,7 @@ $(function() {
 	var $btnCreate = $("#createRow");
 	$btnCreate.click(function() {
 		var rowHtml = '';
-		for (var i=0; i<$("th").length; ++i)
+		for (var i=0; i<=$("th").length; ++i)
 			rowHtml += "<td></td>";
 		rowHtml = $('<tr class="newRow">'+rowHtml+'</tr>');
 		rowHtml.each(initRow);

@@ -1,0 +1,30 @@
+- route: /tot(\d+)/{city:(Paris|London|Roma)}/{name}
+  to: controller.person
+
+- route: /yaya/{city}/{name}  
+  to: controller.person
+  queryParams: {age: int, place: string, male: boolean}
+    
+- redirect: /tata/disco
+  to: /person/{name}/{city}
+
+- redirect: /alpha/cit{city}/nam{name}
+  to: /tata/disco/?city={city}&name={name}
+
+- route: /toto/{name:<name|ok>}/{city}/{age:int}?place={place}&user={user}
+  to: controller.person
+
+- route: /toto
+  to: controller.city
+
+- route: /zorro/?friends={friends:array<int>}&plus={plus:int}
+  to: controller.person
+
+- route: /person/{name}/{city}
+  to: controller.person
+
+- redirect: /toto/{name:boolean}/{city}
+  to: /tata/?place={city}&user={name}
+
+- redirect: /<[z]?(al)+>/{name}
+  to: http://jie.fr/{name}
