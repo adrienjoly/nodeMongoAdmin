@@ -41,14 +41,14 @@ exports.view = function(collectionName, records) {
 	
 	var columns = detectColumns(records);
 	
-	var htmlCols = '<tr><th>' + columns.join('</th><th>') + '</th></tr>';
+	var htmlCols = '<tr><th>' + columns.join('</th><th>') + '</th><th></th></tr>';
 	
 	var htmlRecords = [];
 	for (var i in records) {
 		var row = '';
 		for (var j in columns)
 			row += '<td>' + records[i][columns[j]] + '</td>';
-		htmlRecords.push('<tr>' + row + '</tr>');
+		htmlRecords.push('<tr>' + row + '<td class="actions"></td></tr>');
 	}
 	
 	var html = [
@@ -57,7 +57,8 @@ exports.view = function(collectionName, records) {
 			htmlCols,
 			htmlRecords.join("\n"),
 		'</table>',
-		'<div id="editor"><textarea name="value"></textarea><button>save</button></div>',
+		'<button id="createRow">create a new row</button>',
+		'<div id="editor"><textarea name="value" placeholder="enter a value"></textarea><button>save</button></div>',
 		'<div id="msgBox"></div>'
 	];
 	

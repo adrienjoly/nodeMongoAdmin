@@ -7,13 +7,9 @@ $(function() {
 	}
 	
 	function Cursor($table) {
-		var $cols = $table.find("th");
-		var $rows = $table.find("tr");
-		var nbCols = $cols.length;
-		var nbRows = $rows.length;
+		var $cols, $rows, nbCols, nbRows;
 		var handlers = {};
-		//console.log("nbCols, nbRows", nbCols, nbRows);
-		return {
+		var cursor = {
 			row: 1,
 			col: 0,
 			elem: null,
@@ -34,11 +30,11 @@ $(function() {
 			},
 			selectByRowCol: function(row, col) {
 				//console.log("new", row, col);
-				if (row <= 0 || row >= nbRows || col < 0 || col >= nbCols)
-					return;
-				this.row = row;
-				this.col = col;
-				this._updateElem($('tr:eq('+row+')').find('td:eq('+col+')'));
+				if (row > 0 && row < nbRows)
+					this.row = row;
+				if (col >= 0 && col < nbCols)
+					this.col = col;
+				this._updateElem($('tr:eq('+this.row+')').find('td:eq('+this.col+')'));
 			},
 			selectByIncr: function (rowIncr, colIncr) {
 				var newRow = this.row + (rowIncr || 0);
@@ -59,10 +55,19 @@ $(function() {
 			getColumnName: function(col) {
 				return $cols.eq(col || this.col).html();
 			},
-			getRowId: function() {
-				return this.elem.closest("tr").find("td").first().html();
+			getRowId: function($tr) {
+				return ($tr || this.elem.closest("tr")).find("td").first().html();
+			},
+			reindexTable: function() {
+				$cols = $table.find("th");
+				$rows = $table.find("tr");
+				nbCols = $cols.length -1;
+				nbRows = $rows.length;
+				//console.log("nbCols, nbRows", nbCols, nbRows);
 			}
 		};
+		cursor.reindexTable();
+		return cursor;
 	};
 
 	function CellEditor ($editor) {
@@ -73,6 +78,7 @@ $(function() {
 			onCellSelection: function (newCursor) {
 				cursor = newCursor;
 				$field.val(newCursor.val());
+				$field.attr("placeholder", "enter a value for " + newCursor.getColumnName());
 			}
 		};
 		$saveButton.click(function() {
@@ -94,14 +100,28 @@ $(function() {
 		return cellEditor;
 	}
 	
-	var cellEditor = new CellEditor($("#editor"));
+	function initRow() {
+		var $row = $(this);
+		var $cells = $row.find("td").click(function(){
+			var $cell = $(this);
+			if (!$cell.hasClass("actions"))
+				cursor.selectByElem($cell);
+		});
+		var $del = $('<div class="del">x</div>').click(function() {
+			confirm("delete id=" + cursor.getRowId($row));
+		});
+		$cells.last().append($del);
+	}
 	
-	var cursor = new Cursor($("table"));
+	var $editor = $("#editor");
+	var $table = $("table");
+	
+	var cellEditor = new CellEditor($editor);
+	
+	var cursor = new Cursor($table);
 	cursor.addHandler("onCellSelection", cellEditor.onCellSelection);
 	
-	$("td").click(function(){
-		cursor.selectByElem($(this));
-	});
+	$("tr").each(initRow);
 	
 	$(window).keyup(function(e) {
 		var keyCode = e.keyCode
@@ -113,5 +133,18 @@ $(function() {
 			cursor.selectByIncr(0, -1);
 		else if (keyCode == 39) // right
 			cursor.selectByIncr(0, 1);
+	});
+	
+	var $btnCreate = $("#createRow");
+	$btnCreate.click(function() {
+		var rowHtml = '';
+		for (var i=0; i<$("th").length; ++i)
+			rowHtml += "<td></td>";
+		rowHtml = $('<tr class="newRow">'+rowHtml+'</tr>');
+		rowHtml.each(initRow);
+		$table.append(rowHtml);
+		cursor.reindexTable();
+		var lastRow = $("tr").length -1;
+		cursor.selectByRowCol(lastRow, 1);
 	});
 });

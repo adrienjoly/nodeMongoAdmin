@@ -13,8 +13,16 @@ tr:nth-child(odd) {
 	background: #FFF
 }
 
+tr.newRow {
+	background: yellow;
+}
+
 td.sel {
 	background: red;
+}
+
+.actions {
+	background: white;
 }
 
 #editor {
