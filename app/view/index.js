@@ -63,7 +63,7 @@ exports.view = function($) {
 	var page = parseInt($.page);
 	var nbPages = parseInt($.nbPages);
 	
-	linkPrefix += '&orderBy='+columns[i];
+	linkPrefix += '&orderBy='+$.orderBy;
 	
 	var html = [
 		'<p>Collection: ' + collectionName + '</p>',

@@ -2,7 +2,7 @@ exports.model = function($, db, Return) {
   console.log("index.js", $);
   var collection = $.collection;
   var page = $.page || 1;
-  var limit = $.pageLength || 20;
+  var limit = $.pageLength || 10;
   var skip = (page - 1) * limit;
   var sort = {};
   sort[$.orderBy || '_id'] = $.decreasing ? -1 : 1;

@@ -53,7 +53,7 @@ $(function() {
 				return this.elem.html();
 			},
 			getColumnName: function(col) {
-				return $cols.eq(col || this.col).html();
+				return $cols.eq(col || this.col).find("a").html();
 			},
 			getRowId: function($tr) {
 				return ($tr || this.elem.closest("tr")).find("td").first().html();
