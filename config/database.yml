@@ -1,9 +1,9 @@
 development:
-  database: whyd_freebase
+  database: test
   host: localhost
   port: 27017
 
 production:
-  database: whyd_freebase
+  database: test
   host: localhost
   port: 27017

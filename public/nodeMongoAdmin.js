@@ -135,8 +135,21 @@ $(function() {
 			cursor.selectByIncr(0, 1);
 	});
 	
-	var $btnCreate = $("#createRow");
-	$btnCreate.click(function() {
+	var $btnCreateRow = $("#createRow");
+	$btnCreateRow.click(function() {
+		var rowHtml = '';
+		for (var i=0; i<=$("th").length; ++i)
+			rowHtml += "<td></td>";
+		rowHtml = $('<tr class="newRow">'+rowHtml+'</tr>');
+		rowHtml.each(initRow);
+		$table.append(rowHtml);
+		cursor.reindexTable();
+		var lastRow = $("tr").length -1;
+		cursor.selectByRowCol(lastRow, 1);
+	});
+	
+	var $btnCreateDoc = $("#createDoc");
+	$btnCreateDoc.click(function() {
 		var rowHtml = '';
 		for (var i=0; i<=$("th").length; ++i)
 			rowHtml += "<td></td>";

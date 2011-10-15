@@ -39,9 +39,9 @@ function detectColumns(records) {
 
 exports.view = function($) {
 	
-        var collectionName = $.collection;
-        var records = $.elements;
-        
+	var collectionName = $.collection;
+	var records = $.elements;
+
 	var columns = detectColumns(records);
 	
 	var htmlCols = '<tr><th>' + columns.join('</th><th>') + '</th></tr>';
@@ -54,6 +54,11 @@ exports.view = function($) {
 		htmlRecords.push('<tr>' + row + '<td class="actions"></td></tr>');
 	}
 	
+	var linkPrefix = "?collection=" + collectionName;
+	
+	var page = parseInt($.page);
+	var nbPages = parseInt($.nbPages);
+	
 	var html = [
 		'<p>Collection: ' + collectionName + '</p>',
 		'<table>',
@@ -61,6 +66,12 @@ exports.view = function($) {
 			htmlRecords.join("\n"),
 		'</table>',
 		'<button id="createRow">create a new row</button>',
+		'<button id="createDoc">create a new doc</button>',
+		'<div id="pagination">',
+			'<a href="' + (page > 1 ? linkPrefix+'&page='+(page-1) : "#") +'" id="prev" ' + (page == 1 ? 'class="disabled"' : '') + '>prev</a>',
+			'<div id="page">' + page + " / " + nbPages + '</div>',
+			'<a href="' + (page < nbPages ? linkPrefix+'&page='+(page+1) : "#") +'" id="next" ' + (page == nbPages ? 'class="disabled"' : '') + '>next</a>',
+		'</div>',
 		'<div id="editor"><textarea name="value" placeholder="enter a value"></textarea><button>save</button></div>',
 		'<div id="msgBox"></div>'
 	];
