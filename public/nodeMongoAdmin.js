@@ -82,16 +82,24 @@ $(function() {
 			}
 		};
 		$saveButton.click(function() {
-			var reqData = {
-				action: "update",
-				_id: cursor.getRowId()
-			};
+			var id = cursor.getRowId();
 			var newVal = $field.val();
-			reqData[cursor.getColumnName()] = newVal;
-			console.log("update", reqData);
+			/*
+			var set = {};
+			set[cursor.getColumnName()] = newVal;
+			var params = {
+				collection: collectionName,
+				element: {"_id": id},
+				modif: {$set:set}
+			};
+			var url = '/update?' + params
+			*/
+			var url = '/update?collection='+encodeURIComponent(collectionName)+'&element='+ encodeURIComponent('{"_id":"'+id+'"}')+'&modif=' + encodeURIComponent('{"$set":{"'+cursor.getColumnName()+'":"'+newVal+'"}}');
+			console.log(url);
 			$.ajax({
-				data: reqData,
+				url: url,
 				success: function (r) {
+					console.log("done", r);
 					cursor.val(newVal);
 					message("Successfully saved");
 				}

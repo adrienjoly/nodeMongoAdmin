@@ -73,7 +73,8 @@ exports.view = function($) {
 			'<a href="' + (page < nbPages ? linkPrefix+'&page='+(page+1) : "#") +'" id="next" ' + (page == nbPages ? 'class="disabled"' : '') + '>next</a>',
 		'</div>',
 		'<div id="editor"><textarea name="value" placeholder="enter a value"></textarea><button>save</button></div>',
-		'<div id="msgBox"></div>'
+		'<div id="msgBox"></div>',
+		'<script>var collectionName="'+collectionName+'";</script>'
 	];
 	
 	return makeHtmlPage(html.join("\n"));

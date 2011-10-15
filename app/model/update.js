@@ -1,4 +1,5 @@
 exports.model = function($, db, Return) {
+	console.log("update", $);
   var collection = $.collection;
   var element = $.element;
   var modif = $.modif;
