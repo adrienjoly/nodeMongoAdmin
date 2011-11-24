@@ -38,8 +38,14 @@ function detectColumns(records) {
 }
 
 exports.view = function($) {
+
+	console.log("coucou");
+	
+	if (!$)
+		return makeHtmlPage("collectionName parameter missing");
 	
 	var collectionName = $.collection;
+	
 	var records = $.elements;
 
 	var columns = detectColumns(records);
